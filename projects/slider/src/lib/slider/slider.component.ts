@@ -4,12 +4,8 @@ import { Component } from '@angular/core';
   selector: 'lib-slider',
   standalone: true,
   imports: [],
-  template: `
-    <p>
-      slider works!
-    </p>
-  `,
-  styles: ``
+  templateUrl: './slider.component.html',
+  styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
 
