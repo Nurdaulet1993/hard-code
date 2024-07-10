@@ -17,7 +17,7 @@ export const slides: Slide[] = [
     id: 3,
     image: 'https://images.pexels.com/photos/23020602/pexels-photo-23020602/free-photo-of-a-fountain-with-statues-in-front-of-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     url: 'https://dribbble.com/',
-    priority: 1
+    priority: 10
   },
   {
     id: 3,

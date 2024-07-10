@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  input,
+  input, OnInit,
   signal
 } from '@angular/core';
 import { Slide } from './slide.model';
@@ -15,12 +15,16 @@ import { Slide } from './slide.model';
   styleUrl: './slider.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SliderComponent {
+export class SliderComponent implements OnInit {
   delay = input<number>(3000);
   _slides = input<Slide[]>([], { alias: 'slides'});
-  slides = computed(() => this._slides().sort((a, b) => b.priority -  a.priority));
-  currentIndex = signal(0);
+  private slides = computed(() => this._slides().sort((a, b) => b.priority -  a.priority));
+  private currentIndex = signal(0);
   currentSlide = computed(() => this.slides()[this.currentIndex()]);
+
+  ngOnInit(): void {
+    setInterval(() => this.next(), this.delay());
+  }
 
   prev() {
     this.currentIndex.set(this.currentIndex() - 1);
