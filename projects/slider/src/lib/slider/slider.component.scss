@@ -17,3 +17,26 @@ button {
     margin-right: 15px;
   }
 }
+
+.card {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  p {
+    padding: 10px 15px;
+    background-color: #fff;
+    font-size: 22px;
+    border-radius: 50%;
+  }
+
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 15px;
+}
