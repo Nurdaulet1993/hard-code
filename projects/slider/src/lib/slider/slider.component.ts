@@ -2,11 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  input, OnInit,
+  input, OnDestroy, OnInit,
   signal
 } from '@angular/core';
 import { Slide } from './slide.model';
-import {NgStyle} from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'lib-slider',
@@ -18,23 +18,30 @@ import {NgStyle} from '@angular/common';
   styleUrl: './slider.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, OnDestroy  {
   _slides = input<Slide[]>([], { alias: 'slides'});
   private slides = computed(() => this._slides().sort((a, b) => b.priority -  a.priority));
 
-  delay = input<number>(2000);
+  autoplay = input<boolean>(false);
+  delay = input<number>(3000);
   slidesShow = input(1);
+  private timerId: number | null = null;
   private currentIndex = signal(0);
 
-  currentSlides = computed(() => {
-    if (this.slidesShow() + this.currentIndex() > this.slides().length) {
-      return [...this.slides().slice(this.currentIndex()), ...this.slides().slice(0, this.slidesShow() - (this.slides().length - this.currentIndex()))];
-    }
-    return this.slides().slice(this.currentIndex(), this.currentIndex() + this.slidesShow());
-  });
+  currentSlides = computed(() =>
+    this.slidesShow() + this.currentIndex() > this.slides().length
+      ? [...this.slides().slice(this.currentIndex()), ...this.slides().slice(0, this.slidesShow() - (this.slides().length - this.currentIndex()))]
+      : this.slides().slice(this.currentIndex(), this.currentIndex() + this.slidesShow())
+  );
 
   ngOnInit(): void {
-    // setInterval(() => this.next(), this.delay());
+    if (this.autoplay()) {
+      this.timerId = setInterval(() => this.next(), this.delay());
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.timerId) clearInterval(this.timerId);
   }
 
   prev() {

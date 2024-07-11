@@ -1,4 +1,5 @@
-
 @if (slides$ | async; as slides) {
-  <lib-slider [slides]="slides"></lib-slider>
+  <lib-slider [slides]="slides" [autoplay]="true" [delay]="1000"></lib-slider>
+  <lib-slider [slides]="slides" [slidesShow]="3" [autoplay]="true"></lib-slider>
+  <lib-slider [slides]="slides" [slidesShow]="4"></lib-slider>
 }

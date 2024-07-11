@@ -1,11 +1,35 @@
-<div class="wrapper">
+<div class="slider-wrapper">
   @for (slide of currentSlides(); track slide.id; let i = $index) {
-    <div class="card" [style.background-image]="getSlideUrl(slide.image)">
-      <p>{{ slide.id }}</p>
-    </div>
+    <a [href]="slide.url" target="_blank" class="slider-card" [style.background-image]="getSlideUrl(slide.image)"></a>
   }
 </div>
-<p>
-  <button (click)="prev()">Prev</button>
-  <button (click)="next()">Next</button>
-</p>
+
+<div class="slider-actions">
+  <button class="slider-btn" (click)="prev()">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="24" height="24"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+    >
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+  <button class="slider-btn" (click)="next()">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="24" height="24"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+    >
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+</div>
+
